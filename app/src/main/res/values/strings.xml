@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Kemmadur</string>
+    <string name="main_page_button">C\'hoari !</string>
+
+    <string name="title_activity_exercise">Poelladenn</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
