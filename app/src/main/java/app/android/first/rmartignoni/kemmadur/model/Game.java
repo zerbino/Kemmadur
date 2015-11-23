@@ -39,7 +39,7 @@ public class Game {
 
     public Question nextQuestion() throws QuestionEndException{
         this.currentQuestionIndex ++;
-        if(this.currentQuestionIndex > this.getNumberQuestions() - 1){
+        if (this.currentQuestionIndex > this.getNumberQuestions() - 1) {
             throw new QuestionEndException();
         }
         this.currentQuestion = this.questions.randomQuestion();
@@ -52,7 +52,7 @@ public class Game {
 
         private String rightAnswer;
 
-        public AnswerDetail(boolean isRightAnswer, String rightAnswer){
+        public AnswerDetail(boolean isRightAnswer, String rightAnswer) {
             this.isRightAnswer = isRightAnswer;
             this.rightAnswer = rightAnswer;
         }
