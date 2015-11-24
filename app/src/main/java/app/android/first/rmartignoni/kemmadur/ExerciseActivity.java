@@ -1,7 +1,7 @@
 package app.android.first.rmartignoni.kemmadur;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,14 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import app.android.first.rmartignoni.kemmadur.model.Game;
 import app.android.first.rmartignoni.kemmadur.model.Question;
 import app.android.first.rmartignoni.kemmadur.model.Questions;
 import app.android.first.rmartignoni.kemmadur.presenter.ExercisePresenter;
 
-public class ExerciseActivity extends AppCompatActivity implements View.OnClickListener {
+public class ExerciseActivity extends AppCompatActivity {
 
     private ExercisePresenter exercisePresenter;
 
@@ -27,27 +31,31 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_exercise);
         this.exercisePresenter = new ExercisePresenter(this);
         this.exercisePresenter.onCreate();
-        Button validateButton = (Button) this.findViewById(R.id.exercise_validate_button);
-        validateButton.setOnClickListener(this);
     }
 
-    public void populateView(Questions questions, Question currentQuestion){
+    public void populateView(Game game){
+        Questions questions = game.getQuestions();
+        Question currentQuestion = game.getCurrentQuestion();
+        List<String> proposals = game.getProposals();
         TextView instructionTextView = (TextView) this.findViewById(R.id.exercise_instruction_text);
         instructionTextView.setText(questions.getInstructions());
         TextView dottedSentenceTextView = (TextView) this.findViewById(R.id.exercise_dotted_sentence_text);
         dottedSentenceTextView.setText(currentQuestion.getDottedSentence());
         TextView wordToMutateTextView = (TextView) this.findViewById(R.id.word_to_mutate);
         wordToMutateTextView.setText(currentQuestion.getUnmutatedWord());
-    }
-
-    public void resetEditText(){
-        TextView proposalTextView = (TextView) this.findViewById(R.id.exercise_edit_text);
-        proposalTextView.setText("");
-    }
-
-    public String getProposal(){
-        TextView proposalTextView = (TextView) this.findViewById(R.id.exercise_edit_text);
-        return proposalTextView.getText().toString().trim();
+        LinearLayout buttonProposalLayout = (LinearLayout) findViewById(R.id.exercise_proposal_buttons);
+        buttonProposalLayout.removeAllViews();
+        for (final String proposal : proposals) {
+            Button proposalButton = new Button(this);
+            proposalButton.setText(proposal);
+            buttonProposalLayout.addView(proposalButton);
+            proposalButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exercisePresenter.validate(proposal);
+                }
+            });
+        }
     }
 
     @Override
@@ -80,20 +88,14 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
         ImageView toastImageView = (ImageView) toastLayout.findViewById(R.id.answer_toast_imageview);
         if (rightAnswer){
             toastImageView.setImageResource(R.drawable.ic_message_ok);
-//            toast = Toast.makeText(this, "Well done!", Toast.LENGTH_LONG);
         }
         else{
             toastImageView.setImageResource(R.drawable.ic_message_red_cross);
-//            toast = Toast.makeText(this, "Sorry, wrong answer...", Toast.LENGTH_LONG);
         }
         Toast toast = new Toast(getApplicationContext());
         toast.setView(toastLayout);
-        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.setGravity(Gravity.TOP, 0, 150);
         toast.show();
     }
 
-    @Override
-    public void onClick(View v) {
-        this.exercisePresenter.validate();
-    }
 }

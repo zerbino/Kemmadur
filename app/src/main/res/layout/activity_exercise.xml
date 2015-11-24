@@ -43,18 +43,13 @@
             />
 
     </LinearLayout>
-    <EditText
-        android:id="@+id/exercise_edit_text"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        />
-    <Button
-        android:id="@+id/exercise_validate_button"
+    <LinearLayout
+        android:id="@+id/exercise_proposal_buttons"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/exercise_edit_text"
-        android:layout_alignBaseline="@id/exercise_edit_text"
-        android:text="validate"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        >
+    </LinearLayout>
 </RelativeLayout>
