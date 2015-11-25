@@ -8,11 +8,31 @@ import java.util.List;
  * Created by rmartignoni on 10/11/2015.
  */
 public class Question {
+    private long id = -1;
+    /**
+     * The incomplete sentence to be displayed to the user, with dots in place of the word to be mutated.
+     */
     private String dottedSentence;
+    /**
+     * The word to be mutated, consideraring it should be place in the dots of the dotted sentence, in its unmutated form.
+     */
     private String unmutatedWord;
+    /**
+     * The right answer to the question, i.e. the mutated word.
+     */
     private String answer;
+    /**
+     * The list of wrong proposals to display with the right answer.
+     */
     private List<String> proposals;
+    /**
+     * The max number of proposals to be displayed  when performing the exercise.
+     */
     private int MAX_PROPOSAL_VALUE = 4;
+    /**
+     * The grammatical rule linked to that question.
+     */
+    private Rule rule;
 
     public Question() {
     }
