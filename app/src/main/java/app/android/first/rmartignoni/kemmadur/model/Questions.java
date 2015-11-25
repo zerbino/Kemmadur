@@ -1,6 +1,6 @@
 package app.android.first.rmartignoni.kemmadur.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rmartignoni on 10/11/2015.
@@ -9,9 +9,9 @@ public class Questions {
 
     private String instructions;
 
-    private ArrayList<Question> questions;
+    private List<Question> questions;
 
-    public Questions(String instructions, ArrayList<Question> questions) {
+    public Questions(String instructions, List<Question> questions) {
         this.instructions = instructions;
         this.questions = questions;
     }
@@ -20,7 +20,7 @@ public class Questions {
         return instructions;
     }
 
-    private ArrayList<Question> getQuestions() {
+    private List<Question> getQuestions() {
         return questions;
     }
 
