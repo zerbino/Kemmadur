@@ -25,7 +25,7 @@ public class ExercisePresenter {
     }
 
     public void onCreate() {
-        ExerciseGenerator exerciseGenerator = new ExerciseGenerator();
+        ExerciseGenerator exerciseGenerator = new ExerciseGenerator(this.exerciseActivity);
         Questions questions = exerciseGenerator.getQuestions();
         this.game = new Game(10, questions);
         this.exerciseActivity.populateView(this.game);
