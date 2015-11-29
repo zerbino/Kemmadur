@@ -1,5 +1,8 @@
 package app.android.first.rmartignoni.kemmadur.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by rmartignoni on 24/11/2015.
  */
@@ -7,11 +10,21 @@ public class Rule {
 
     private int id;
 
-    private String rule;
+    private String name;
 
-    public Rule(int id, String rule) {
+    private String mutatioName;
+
+    private List<String> conditions;
+
+    public Rule(int id, String name, String mutatioName, List<String> conditions) {
         this.id = id;
-        this.rule = rule;
+        this.name = name;
+        this.mutatioName = mutatioName;
+        this.conditions = conditions;
+    }
+
+    public Rule(){
+        this.conditions = new ArrayList<>();
     }
 
     public int getId() {
@@ -22,11 +35,27 @@ public class Rule {
         this.id = id;
     }
 
-    public String getRule() {
-        return rule;
+    public String getName() {
+        return name;
     }
 
-    public void setRule(String rule) {
-        this.rule = rule;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMutatioName() {
+        return mutatioName;
+    }
+
+    public void setMutatioName(String mutatioName) {
+        this.mutatioName = mutatioName;
+    }
+
+    public List<String> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<String> conditions) {
+        this.conditions = conditions;
     }
 }
